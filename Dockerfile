@@ -1,11 +1,20 @@
-FROM felddy/foundryvtt:release
+FROM felddy/foundryvtt:13
 
-ARG FOUNDRY_PASSWORD
+VOLUME /data
+
+USER 421:421
+
 ARG FOUNDRY_USERNAME
-ARG FOUNDRY_VERSION=12.331
+ARG FOUNDRY_PASSWORD
+ARG FOUNDRY_ADMIN_KEY
+ARG HOSTNAME
 
-EXPOSE 30000/TCP
+ENV FOUNDRY_USERNAME=$FOUNDRY_USERNAME \
+    FOUNDRY_PASSWORD=$FOUNDRY_PASSWORD \
+    FOUNDRY_ADMIN_KEY=$FOUNDRY_ADMIN_KEY \
+    HOSTNAME=$HOSTNAME
+
+EXPOSE 30000/tcp
 
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["resources/app/main.mjs", "--port=30000", "--headless", "--noupdate", "--dataPath=/data"]
-HEALTHCHECK --start-period=3m --interval=30s --timeout=5s CMD ./check_health.sh
+CMD ["resources/app/main.mjs", "--port", "30000", "--headless", "--noupdate", "--dataPath=/data"]
