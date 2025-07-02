@@ -3,12 +3,12 @@ version: "3.9"
 services:
   foundry:
     image: felddy/foundryvtt:13
-    hostname: ${HOSTNAME}
-    user: 421:421
+    hostname: my_hostname
     volumes:
-      - foundry_data:/data
+      - type: bind
+        source: ./data
+        target: /data
     environment:
-      HOSTNAME: ${HOSTNAME}
       FOUNDRY_PASSWORD: ${FOUNDRY_PASSWORD}
       FOUNDRY_USERNAME: ${FOUNDRY_USERNAME}
       FOUNDRY_ADMIN_KEY: ${FOUNDRY_ADMIN_KEY}
@@ -16,4 +16,3 @@ services:
       - target: 30000
         published: 30000
         protocol: tcp
-        mode: host
