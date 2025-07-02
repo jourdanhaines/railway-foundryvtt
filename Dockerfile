@@ -1,7 +1,5 @@
 FROM felddy/foundryvtt:13
 
-VOLUME /data
-
 USER 421:421
 
 ARG FOUNDRY_USERNAME
