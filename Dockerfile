@@ -4,15 +4,9 @@ USER 421:421
 
 ARG FOUNDRY_USERNAME
 ARG FOUNDRY_PASSWORD
-ARG FOUNDRY_ADMIN_KEY
-ARG HOSTNAME
-
-ENV FOUNDRY_USERNAME=$FOUNDRY_USERNAME \
-    FOUNDRY_PASSWORD=$FOUNDRY_PASSWORD \
-    FOUNDRY_ADMIN_KEY=$FOUNDRY_ADMIN_KEY \
-    HOSTNAME=$HOSTNAME
+ARG FOUNDRY_VERSION=13.346
 
 EXPOSE 30000/tcp
 
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["resources/app/main.mjs", "--port", "30000", "--headless", "--noupdate", "--dataPath=/data"]
+CMD ["resources/app/main.mjs", "--port=30000", "--headless", "--noupdate", "--dataPath=/data"]
